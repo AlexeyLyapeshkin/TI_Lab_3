@@ -12,8 +12,8 @@ text_2 = 'Enter B: '
 text_3 = 'Enter P: '
 text_4 = 'Enter Q: '
 
-error_text = 'One of parametrs is false'
-error_text_2 = 'Empty fields'
+error_text = 'One of parametrs is false!'
+error_text_2 = 'Empty fields!'
 
 text_1_out = 'Start file: '
 text_2_out = 'Cipher file: '
@@ -96,7 +96,7 @@ def mainframe():
     button_two = tkinter.Button(Main_Window, text=deciphr_but_text, bg='Dodger Blue', fg='White', width=20, command = (lambda  : create_decrypt()))
     button_two.place(relx=.5 - .1, rely=.6)
 
-    Main_Window.update_idletasks()
+    #Main_Window.update_idletasks()
     # end of prog
     Main_Window.mainloop()
 
@@ -108,31 +108,63 @@ def encryption_frame(*w,**kw):
         mainframe()
 
     def go_ciph(*w,**kw):
+
+        def mul_check(str):
+            if str.find('*',) != -1:
+                pos = str.find('*')
+                try:
+                    kek1 = int(str[:pos])
+                    kek2 = int(str[pos+1:])
+                except ValueError:
+                    messagebox.showerror('Error','Wrong characters!')
+
+                if testing(2,kek1*kek2,kek1,kek2) and kek1 % 4 == 3 and kek2 % 4 == 3:
+                    return kek1*kek2
+                else:
+                    return False
+            else:
+                return int(str)
+
         from tkinter import messagebox
         from tkinter.filedialog import askopenfilename
 
         n = n_entry.get()
         b = b_entry.get()
         out_array_0 = []
+        #print(type(n))
+        if not(n == '' or b == '') :
+            if n.isdigit() and b.isdigit():
+                n = mul_check(n)
+                #print(n)
+                b = int(b)
+                if n == False:
+                    messagebox.showerror('Error',error_text)
+                else:
 
-        if not(n == '' or b == ''):
-            n = int(n)
-            b = int(b)
+                    if testing(b, n):
 
-            if testing(b, n):
-                filename = askopenfilename()
-                Cipher(filename, n, b)
+                        filename = askopenfilename()
+                        if filename != '':
+                            Cipher(filename, n, b)
 
+                            for byte in bytes_from_file(filename):
+                                out_array_0.append(byte)
+                            out_array_1 = read_from_f(filename + '.cph')
+                            root2.destroy()
+                            out_inf(out_array_0, out_array_1, [])
+
+                        else:
+                            messagebox.showerror('Error', 'You don\'t choose any file!')
+
+                    else:
+                        messagebox.showerror('Error',error_text)
             else:
-                messagebox.showerror('Error',error_text)
+                messagebox.showerror('Error','N or B isn\'t digits!')
+
         else:
             messagebox.showerror('Error',error_text_2)
 
-        for byte in bytes_from_file(filename):
-            out_array_0.append(byte)
-        out_array_1 = read_from_f(filename+'.cph')
-        root2.destroy()
-        out_inf(out_array_0,out_array_1,[])
+
 
 
 
@@ -191,25 +223,33 @@ def decryption_frame(*w,**kw):
         b = b_entry.get()
 
         if not (p == '' or  q == '' or b == ''):
-            p = int(p)
-            q = int(q)
-            b = int(b)
-            out_array_0 = []
-            out_array_1 = []
+            if p.isdigit() and q.isdigit() and b.isdigit():
+                try:
+                    p = int(p)
+                    q = int(q)
+                    b = int(b)
+                except ValueError:
+                    messagebox.showerror('Error','Wrong charecters!')
+                out_array_0 = []
 
+                if testing(b, p*q,p,q):
 
-            if testing(b, p*q,p,q):
-                filename = askopenfilename()
-                out_array_2 = Decipher(filename,p,q, b)
-                for byte in bytes_from_file(filename[:len(filename) - 4]):
-                    out_array_0.append(byte)
+                    filename = askopenfilename()
+                    if filename != '':
+                        out_array_2 = Decipher(filename,p,q, b)
+                        for byte in bytes_from_file(filename[:len(filename) - 4]):
+                            out_array_0.append(byte)
 
-                out_array_1 =read_from_f(filename)
+                        out_array_1 =read_from_f(filename)
 
-                root3.destroy()
-                out_inf(out_array_0, out_array_1, out_array_2, 'd')
+                        root3.destroy()
+                        out_inf(out_array_0, out_array_1, out_array_2, 'd')
+                    else:
+                        messagebox.showerror('Error','You didn\'t choose file!')
+                else:
+                    messagebox.showerror('Error',error_text)
             else:
-                messagebox.showerror('Error',error_text)
+                messagebox.showerror('Error','Wrong characters! (P or Q or B isn\'t characters)')
         else:
             messagebox.showerror('Error',error_text_2)
 

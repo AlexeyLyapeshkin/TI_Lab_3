@@ -133,14 +133,8 @@ def Decipher(filename,p,q,b):
     b_arr.extend(m_arr)
     j = 0
     for i in range(len(m_arr)):
-
         if m_arr[i] < 256:
-            if j == 4:
-                out_arr.append(ord(' '))
-                j = 0
-
             out_arr.append(m_arr[i])
-            j += 1
 
 
     file_out.write(out_arr)
