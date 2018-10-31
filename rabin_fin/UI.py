@@ -1,5 +1,6 @@
 import tkinter
 from Rabin_cryptosystem import Decipher,Cipher,testing,bytes_from_file,read_from_f
+import PIL.Image,PIL.ImageTk
 
 ciphr_but_text = 'Encryption mode'
 deciphr_but_text = 'Decryption mode'
@@ -91,10 +92,17 @@ def mainframe():
 
     # make GUI
     button_one = tkinter.Button(Main_Window, text=ciphr_but_text, bg='Dodger Blue', fg='White', width=20, command= (lambda : create_encrypt()))
-    button_one.place(relx=.5 - .1, rely=.5)
+    button_one.place(relx=.49 - .1, rely=.5)
 
     button_two = tkinter.Button(Main_Window, text=deciphr_but_text, bg='Dodger Blue', fg='White', width=20, command = (lambda  : create_decrypt()))
-    button_two.place(relx=.5 - .1, rely=.6)
+    button_two.place(relx=.49 - .1, rely=.6)
+
+    path = "img/1.png"
+    im = PIL.Image.open(path)
+    photo = PIL.ImageTk.PhotoImage(im)
+    label = tkinter.Label(Main_Window, image=photo, width=250, height=100)
+    label.image = photo  # keep a reference!
+    label.place(x=250, y=50)
 
     #Main_Window.update_idletasks()
     # end of prog
