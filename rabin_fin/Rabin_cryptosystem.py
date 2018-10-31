@@ -93,11 +93,18 @@ def read_from_f(file):
     text = text.split()
     return text
 
+
 def Decipher(filename,p,q,b):
     n = p*q
 
-    file_out = open(filename+filename[len(filename)-4-4:len(filename)-4], 'wb')
-    b_arr = []
+    index = filename.rfind('/')
+    tep_filename = filename
+    
+    tep_filename = tep_filename[:index+1] + '[deciphered]' + tep_filename[index+1:]
+
+    file_out = open(tep_filename[:len(tep_filename) - 4], 'wb')
+    #print(tep_filename[:len(tep_filename) - 4])
+
     m_arr = []
     out_arr = bytearray()
 
@@ -106,7 +113,6 @@ def Decipher(filename,p,q,b):
 
         byte = int(byte)
         D = (b**2 + 4*byte) % n
-
 
         mp = FastEXP(D,(p+1)//4,p)
         mq = FastEXP(D,(q+1)//4,q)
@@ -129,15 +135,12 @@ def Decipher(filename,p,q,b):
             else:
                 m_arr.append(int(((-b + n + d) / 2) % n))
 
-
-    b_arr.extend(m_arr)
-    j = 0
     for i in range(len(m_arr)):
         if m_arr[i] < 256:
             out_arr.append(m_arr[i])
 
-
     file_out.write(out_arr)
     file_out.close()
+
     return m_arr
 

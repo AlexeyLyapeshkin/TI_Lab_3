@@ -133,7 +133,7 @@ def encryption_frame(*w,**kw):
         out_array_0 = []
         #print(type(n))
         if not(n == '' or b == '') :
-            if n.isdigit() and b.isdigit():
+            if  b.isdigit():
                 n = mul_check(n)
                 #print(n)
                 b = int(b)
