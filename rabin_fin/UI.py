@@ -32,8 +32,9 @@ def out_inf(t1,t2,t3,mode='c',*w,**kw):
 
 
     root1 = tkinter.Tk()
-    root1.geometry('500x400')
+    root1.geometry('800x400')
     root1.title('Rabin Cryptosystem')
+    root1.resizable(width=False,height=False)
     # button
     back_button = tkinter.Button(root1, text=go_back_but, bg='Dodger Blue', fg='White', width=20,
                                  command=(lambda: go_back()))
@@ -89,6 +90,7 @@ def mainframe():
     Main_Window = tkinter.Tk()
     Main_Window.geometry('500x400')
     Main_Window.title('Rabin Cryptosystem')
+    Main_Window.resizable(width=False,height=False)
 
     # make GUI
     button_one = tkinter.Button(Main_Window, text=ciphr_but_text, bg='Dodger Blue', fg='White', width=20, command= (lambda : create_encrypt()))
@@ -179,8 +181,9 @@ def encryption_frame(*w,**kw):
 
 
     root2= tkinter.Tk()
-    root2.geometry('500x250')
+    root2.geometry('500x300')
     root2.title('Encryption')
+    root2.resizable(width=False,height=False)
 
 
 
@@ -269,6 +272,7 @@ def decryption_frame(*w,**kw):
     root3 = tkinter.Tk()
     root3.geometry('500x300')
     root3.title('Decryption')
+    root3.resizable(height=False,width=False)
 
 
 
