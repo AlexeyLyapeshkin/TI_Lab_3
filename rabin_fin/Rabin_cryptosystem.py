@@ -13,7 +13,7 @@ def testing(b,n,p=2,q=2):
         return True
 
 
-    if isPrime(p) and isPrime(q) and isPrime(b) and b < n : return True
+    if isPrime(p) and isPrime(q) and b < n and b > 0 and n > 256 : return True
     else: return False
 
 
