@@ -35,6 +35,7 @@ def out_inf(t1,t2,t3,mode='c',*w,**kw):
     root1.geometry('800x400')
     root1.title('Rabin Cryptosystem')
     root1.resizable(width=False,height=False)
+    root1.iconbitmap('img/icon.ico')
     # button
     back_button = tkinter.Button(root1, text=go_back_but, bg='Dodger Blue', fg='White', width=20,
                                  command=(lambda: go_back()))
@@ -91,8 +92,11 @@ def mainframe():
     Main_Window.geometry('500x400')
     Main_Window.title('Rabin Cryptosystem')
     Main_Window.resizable(width=False,height=False)
+    Main_Window.iconbitmap('img/icon.ico')
 
     # make GUI
+
+
     button_one = tkinter.Button(Main_Window, text=ciphr_but_text, bg='Dodger Blue', fg='White', width=20, command= (lambda : create_encrypt()))
     button_one.place(relx=.45 - .1, rely=.5)
 
@@ -116,6 +120,8 @@ def encryption_frame(*w,**kw):
     def go_back(*w,**kw):
         root2.destroy()
         mainframe()
+
+
 
     def go_ciph(*w,**kw):
 
@@ -184,6 +190,7 @@ def encryption_frame(*w,**kw):
     root2.geometry('500x300')
     root2.title('Encryption')
     root2.resizable(width=False,height=False)
+    root2.iconbitmap('img/icon.ico')
 
 
 
@@ -273,6 +280,7 @@ def decryption_frame(*w,**kw):
     root3.geometry('500x300')
     root3.title('Decryption')
     root3.resizable(height=False,width=False)
+    root3.iconbitmap('img/icon.ico')
 
 
 
